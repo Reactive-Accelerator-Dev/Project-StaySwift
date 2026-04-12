@@ -14,6 +14,9 @@ export const {
   adapter: MongoDBAdapter(mongoClientPromise, {
     databaseName: process.env.ENVIRONMENT,
   }),
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     CredentialsProvider({
       credentials: {
