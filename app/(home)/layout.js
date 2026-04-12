@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import { dbConnect } from "@/service/momgo";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
