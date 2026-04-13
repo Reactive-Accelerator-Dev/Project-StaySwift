@@ -68,6 +68,10 @@
   }
 
   input[type="checkbox"] {
-    @apply mx-1
+    @apply mx-1;
+  }
+  button:disabled {
+    @apply bg-gray-500;
+    cursor: default;
   }
 }

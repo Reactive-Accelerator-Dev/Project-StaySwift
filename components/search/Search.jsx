@@ -3,15 +3,15 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
-const Search = ({ fromList }) => {
+const Search = ({ fromList, destination, checkin, checkout }) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
   const [searchTerm, setSearchTerm] = useState({
-    destination: "Puglia",
-    checkin: "",
-    checkout: "",
+    destination: destination || "Puglia",
+    checkin: checkin,
+    checkout: checkout,
   });
 
   const [allowSearch, setAllowSearch] = useState(true);
@@ -57,6 +57,7 @@ const Search = ({ fromList }) => {
               <select
                 name="destination"
                 id="destination"
+                defaultValue={searchTerm.destination}
                 onChange={handleInputs}
               >
                 <option value="Puglia">Puglia</option>
@@ -75,6 +76,7 @@ const Search = ({ fromList }) => {
                 type="date"
                 name="checkin"
                 id="checkin"
+                value={searchTerm.checkin}
                 onChange={handleInputs}
               />
             </h4>
@@ -87,6 +89,7 @@ const Search = ({ fromList }) => {
                 type="date"
                 name="checkout"
                 id="checkout"
+                value={searchTerm.checkout}
                 onChange={handleInputs}
               />
             </h4>
