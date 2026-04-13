@@ -1,4 +1,19 @@
-const Search = ({fromList}) => {
+"use client";
+
+import { useState } from "react";
+
+const Search = ({ fromList }) => {
+  const [searchTerm, setSearchTerm] = useState({
+    destination: "",
+    checkin: "",
+    checkout: "",
+  });
+
+  const handleInputs = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    const state = { ...searchTerm, [name]: value };
+  };
   return (
     <>
       <div className="lg:max-h-[250px] mt-6">
@@ -6,12 +21,16 @@ const Search = ({fromList}) => {
           <div>
             <span>Destination</span>
             <h4 className="mt-2">
-              <select name="destination" id="destination">
-                <option value="Bali">Bali</option>
-                <option value="Bali">Cox's Bazar</option>
-                <option value="Bali">Sylhet</option>
-                <option value="Bali">Saint Martin</option>
-                <option value="Bali">Bali</option>
+              <select
+                name="destination"
+                id="destination"
+                onChange={handleInputs}
+              >
+                <option value="Puglia">Puglia</option>
+                <option value="Catania">Catania</option>
+                <option value="Palermo">Palermo</option>
+                <option value="Frejus">Frejus</option>
+                <option value="Paris">Paris</option>
               </select>
             </h4>
           </div>
@@ -19,20 +38,32 @@ const Search = ({fromList}) => {
           <div>
             <span>Check in</span>
             <h4 className="mt-2">
-              <input type="date" name="checkin" id="checkin" />
+              <input
+                type="date"
+                name="checkin"
+                id="checkin"
+                onChange={handleInputs}
+              />
             </h4>
           </div>
 
           <div>
             <span>Checkout</span>
             <h4 className="mt-2">
-              <input type="date" name="checkout" id="checkout" />
+              <input
+                type="date"
+                name="checkout"
+                id="checkout"
+                onChange={handleInputs}
+              />
             </h4>
           </div>
         </div>
       </div>
 
-      <button className="search-btn">🔍️ {fromList ? "Modify Search": "Search"}</button>
+      <button className="search-btn">
+        🔍️ {fromList ? "Modify Search" : "Search"}
+      </button>
     </>
   );
 };
