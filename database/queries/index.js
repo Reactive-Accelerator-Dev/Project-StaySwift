@@ -3,7 +3,7 @@ import { hotelModel } from "@/models/hotel-model";
 import { ratingModel } from "@/models/rating-model";
 import { reviewModel } from "@/models/review-model";
 import {
-    isDateInbetween,
+  isDateInbetween,
   replaceMongoIdInArray,
   replaceMongoIdInObject,
 } from "@/utils/data-util";
@@ -58,8 +58,17 @@ async function findBooking(hotelId, checkin, checkout) {
   return found;
 }
 
-export async function getHotelById(hotelId) {
+export async function getHotelById(hotelId, checkin, checkout) {
   const hotel = await hotelModel.findById(hotelId).lean();
+
+  if (checkin && checkout) {
+    const found = await findBooking(hotel._id, checkin, checkout);
+    if (found) {
+      hotel["isBooked"] = true;
+    } else {
+      hotel["isBooked"] = false;
+    }
+  }
   return replaceMongoIdInObject(hotel);
 }
 
