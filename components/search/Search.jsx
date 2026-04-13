@@ -1,10 +1,15 @@
 "use client";
 
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 const Search = ({ fromList }) => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
   const [searchTerm, setSearchTerm] = useState({
-    destination: "",
+    destination: "Puglia",
     checkin: "",
     checkout: "",
   });
@@ -25,7 +30,23 @@ const Search = ({ fromList }) => {
     }
     setSearchTerm(state);
   };
-  console.log(searchTerm);
+
+  function doSearch(event) {
+    const params = new URLSearchParams(searchParams);
+
+    params.set("destination", searchTerm?.destination || "all");
+    if (searchTerm?.checkin && searchTerm?.checkout) {
+      params.set("checkin", searchTerm?.checkin);
+      params.set("checkout", searchTerm?.checkout);
+    }
+
+    if (pathname.includes("hotels")) {
+      replace(`${pathname}?${params.toString()}`);
+    } else {
+      replace(`${pathname}hotels?${params.toString()}`);
+    }
+  }
+
   return (
     <>
       <div className="lg:max-h-[250px] mt-6">
@@ -73,7 +94,7 @@ const Search = ({ fromList }) => {
         </div>
       </div>
 
-      <button className="search-btn">
+      <button disabled={!allowSearch} className="search-btn" onClick={doSearch}>
         🔍️ {fromList ? "Modify Search" : "Search"}
       </button>
     </>
