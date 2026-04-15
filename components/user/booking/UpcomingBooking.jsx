@@ -1,4 +1,4 @@
-const UpcomingBooking = () => {
+const UpcomingBooking = ({ bookings }) => {
   return (
     <div className="space-y-4">
       <h2 className="text-xl font-bold">⌛️ Upcomming Bookings</h2>

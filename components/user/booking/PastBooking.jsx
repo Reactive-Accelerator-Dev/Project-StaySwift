@@ -1,4 +1,4 @@
-const PastBooking = () => {
+const PastBooking = ({bookings}) => {
   return (
     <div className="space-y-4">
       <h2 className="text-xl font-bold">🕛️ Past Bookings</h2>
