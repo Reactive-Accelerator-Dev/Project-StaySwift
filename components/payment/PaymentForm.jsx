@@ -1,6 +1,40 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
 const PaymentForm = ({ checkin, checkout, loggedInUser, hotelInfo }) => {
+  const [error, setError] = useState("");
+  const router = useRouter();
+  async function onSubmit(event) {
+    event.preventDefault();
+    try {
+      const formData = new FormData(event.currentTarget);
+      const hotelId = hotelInfo?.id;
+      const userId = loggedInUser?.id;
+      const checkin = formData.get("checkin");
+      const checkout = formData.get("checkout");
+
+      const res = await fetch("/api/auth/payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          hotelId,
+          userId,
+          checkin,
+          checkout,
+        }),
+      });
+      res.status === 201 && router.push("/bookings");
+    } catch (error) {
+      console.error(error);
+      setError(error.message);
+    }
+  }
   return (
-    <form className="my-8">
+    <form className="my-8" onSubmit={onSubmit}>
       <div className="my-4 space-y-2">
         <label htmlFor="name" className="block">
           Name
@@ -73,7 +107,7 @@ const PaymentForm = ({ checkin, checkout, loggedInUser, hotelInfo }) => {
       </div>
 
       <button type="submit" className="btn-primary w-full">
-        Pay Now ($10)
+       Pay Now (${(hotelInfo?.highRate + hotelInfo?.lowRate) / 2})
       </button>
     </form>
   );

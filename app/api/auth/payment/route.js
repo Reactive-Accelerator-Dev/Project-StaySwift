@@ -1,7 +1,8 @@
 import { bookingModel } from "@/models/booking-model";
-import { dbConnect } from "@/service/mongo";
+
 import { NextResponse } from "next/server";
 
+import { dbConnect } from "@/service/momgo";
 import mongoose from "mongoose";
 
 export const POST = async (request) => {
