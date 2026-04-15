@@ -2,9 +2,13 @@ import { auth } from "@/auth";
 import ProfileInfo from "@/components/user/ProfileInfo";
 import PastBooking from "@/components/user/booking/PastBooking";
 import UpcomingBooking from "@/components/user/booking/UpcomingBooking";
+import { getBookingsByUser, getUserByEmail } from "@/database/queries";
 import { redirect } from "next/navigation";
 
 const BookingsPage = async () => {
+  const loggedInUser = await getUserByEmail(session?.user?.email);
+  const bookings = await getBookingsByUser(loggedInUser?.id);
+
   const session = await auth();
   if (!session) {
     redirect("/login");
