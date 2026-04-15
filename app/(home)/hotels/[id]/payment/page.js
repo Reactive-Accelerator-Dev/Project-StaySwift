@@ -33,7 +33,12 @@ const PaymentPage = async ({
           {hasCheckInCheckOut && `for ${getDayDifference(checkin, checkout)}`}{" "}
           day(s).
         </p>
-        <PaymentForm checkin={checkin} checkout={checkout} />
+        <PaymentForm
+          loggedInUser={loggedInUser}
+          hotelInfo={hotelInfo}
+          checkin={checkin}
+          checkout={checkout}
+        />
       </div>
     </section>
   );
