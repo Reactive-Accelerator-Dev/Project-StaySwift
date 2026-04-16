@@ -26,6 +26,16 @@ export default function FilterByStarCategory() {
   };
 
   useEffect(() => {
+    const category = params.get("category");
+
+    if (category) {
+      const decodedCategory = decodeURI(category);
+      const queryInCategory = decodedCategory.split("|");
+      setQuery(queryInCategory);
+    }
+  }, []);
+
+  useEffect(() => {
     if (query.length > 0) {
       params.set("category", encodeURI(query.join("|")));
     } else {
