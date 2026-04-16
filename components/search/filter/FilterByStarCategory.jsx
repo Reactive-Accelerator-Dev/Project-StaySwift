@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 export default function FilterByStarCategory() {
   const [query, setQuery] = useState([]);
 
@@ -24,6 +24,15 @@ export default function FilterByStarCategory() {
 
     console.log(query);
   };
+
+  useEffect(() => {
+    if (query.length > 0) {
+      params.set("category", encodeURI(query.join("|")));
+    } else {
+      params.delete("category");
+    }
+    replace(`${pathname}?${params.toString()}`);
+  }, [query]);
 
   return (
     <div>
