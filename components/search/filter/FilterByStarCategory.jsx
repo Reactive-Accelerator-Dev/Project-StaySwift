@@ -51,6 +51,7 @@ export default function FilterByStarCategory() {
         <label for="fiveStar">
           <input
             onChange={handleChange}
+            checked={query.includes("5")}
             type="checkbox"
             name="5"
             id="fiveStar"
@@ -61,6 +62,7 @@ export default function FilterByStarCategory() {
         <label for="fourStar">
           <input
             onChange={handleChange}
+            checked={query.includes("4")}
             type="checkbox"
             name="4"
             id="fourStar"
@@ -71,6 +73,7 @@ export default function FilterByStarCategory() {
         <label for="threeStar">
           <input
             onChange={handleChange}
+            checked={query.includes("3")}
             type="checkbox"
             name="3"
             id="threeStar"
@@ -81,6 +84,7 @@ export default function FilterByStarCategory() {
         <label for="twoStar">
           <input
             onChange={handleChange}
+            checked={query.includes("2")}
             type="checkbox"
             name="2"
             id="twoStar"
@@ -91,6 +95,7 @@ export default function FilterByStarCategory() {
         <label for="oneStar">
           <input
             onChange={handleChange}
+            checked={query.includes("1")}
             type="checkbox"
             name="1"
             id="oneStar"
